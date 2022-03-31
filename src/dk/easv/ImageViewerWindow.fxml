@@ -3,29 +3,58 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Slider?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
 
-<BorderPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="703.0" prefWidth="1091.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.easv.ImageViewerWindowController">
+<BorderPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="703.0" prefWidth="1091.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.easv.ImageViewerWindowController">
     <top>
         <HBox alignment="CENTER_LEFT" prefHeight="57.0" prefWidth="1091.0" BorderPane.alignment="CENTER">
             <children>
-                <ButtonBar prefHeight="57.0" prefWidth="388.0">
-                    <buttons>
-                        <Button id="btnLoad" fx:id="btnLoad" mnemonicParsing="false" onAction="#handleBtnLoadAction" prefHeight="27.0" prefWidth="141.0" text="Load images...">
-                            <opaqueInsets>
-                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                            </opaqueInsets>
-                        </Button>
-                        <Button id="btnPrevious" fx:id="btnPrevious" mnemonicParsing="false" onAction="#handleBtnPreviousAction" text="Previous">
-                            <opaqueInsets>
-                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                            </opaqueInsets>
-                        </Button>
-                        <Button id="btnNext" fx:id="btnNext" mnemonicParsing="false" onAction="#handleBtnNextAction" text="Next" />
-                    </buttons>
-                </ButtonBar>
+            <GridPane prefHeight="46.0" prefWidth="1006.0">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="455.0" minWidth="10.0" prefWidth="455.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="321.0" minWidth="10.0" prefWidth="35.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="321.0" minWidth="10.0" prefWidth="266.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="321.0" minWidth="10.0" prefWidth="247.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                      <ButtonBar prefHeight="57.0" prefWidth="388.0">
+                          <buttons>
+                              <Button id="btnLoad" fx:id="btnLoad" mnemonicParsing="false" onAction="#handleBtnLoadAction" prefHeight="27.0" prefWidth="141.0" text="Load images...">
+                                  <opaqueInsets>
+                                      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                  </opaqueInsets>
+                              </Button>
+                              <Button id="btnPrevious" fx:id="btnPrevious" mnemonicParsing="false" onAction="#handleBtnPreviousAction" text="Previous">
+                                  <opaqueInsets>
+                                      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                  </opaqueInsets>
+                              </Button>
+                              <Button id="btnNext" fx:id="btnNext" mnemonicParsing="false" onAction="#handleBtnNextAction" prefHeight="25.0" prefWidth="187.0" text="Next" />
+                        <Button id="btnNext" fx:id="btnStart" layoutX="282.0" layoutY="26.0" mnemonicParsing="false" onAction="#handleBtnStartAction" prefHeight="25.0" prefWidth="187.0" text="Start" />
+                          </buttons>
+                      </ButtonBar>
+                  <Label alignment="CENTER" contentDisplay="CENTER" text="Label" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                  </Label>
+                  <Slider fx:id="sliderSpeed" blockIncrement="1.0" majorTickUnit="1.0" max="4.0" min="1.0" minorTickCount="1" showTickLabels="true" showTickMarks="true" snapToTicks="true" GridPane.columnIndex="3">
+                     <padding>
+                        <Insets left="10.0" />
+                     </padding>
+                  </Slider>
+               </children>
+            </GridPane>
             </children>
             <opaqueInsets>
                 <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -35,7 +64,7 @@
     <center>
         <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
             <center>
-                <ImageView fx:id="imageView" fitHeight="647.0" fitWidth="1090.0" pickOnBounds="true" preserveRatio="true" />
+                <ImageView fx:id="imageView" fitHeight="647.0" fitWidth="1090.0" onDragDone="#handleSliderSpeed" pickOnBounds="true" preserveRatio="true" />
             </center>
         </BorderPane>
     </center>

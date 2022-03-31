@@ -11,6 +11,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
 
 <BorderPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="703.0" prefWidth="1091.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.easv.ImageViewerWindowController">
     <top>
@@ -20,8 +21,8 @@
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="455.0" minWidth="10.0" prefWidth="455.0" />
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="321.0" minWidth="10.0" prefWidth="35.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="321.0" minWidth="10.0" prefWidth="266.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="321.0" minWidth="10.0" prefWidth="247.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="321.0" minWidth="10.0" prefWidth="238.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="321.0" minWidth="10.0" prefWidth="277.0" />
               </columnConstraints>
               <rowConstraints>
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -43,11 +44,6 @@
                         <Button id="btnNext" fx:id="btnStart" layoutX="282.0" layoutY="26.0" mnemonicParsing="false" onAction="#handleBtnStartAction" prefHeight="25.0" prefWidth="187.0" text="Start" />
                           </buttons>
                       </ButtonBar>
-                  <Label alignment="CENTER" contentDisplay="CENTER" text="Label" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
-                     <opaqueInsets>
-                        <Insets />
-                     </opaqueInsets>
-                  </Label>
                   <Slider fx:id="sliderSpeed" blockIncrement="1.0" majorTickUnit="1.0" max="4.0" min="1.0" minorTickCount="1" showTickLabels="true" showTickMarks="true" snapToTicks="true" value="2.0" GridPane.columnIndex="3">
                      <padding>
                         <Insets left="10.0" />
@@ -62,10 +58,23 @@
         </HBox>
     </top>
     <center>
-        <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+        <BorderPane prefHeight="83.0" prefWidth="1091.0" BorderPane.alignment="CENTER">
             <center>
-                <ImageView fx:id="imageView" fitHeight="647.0" fitWidth="1090.0" onDragDone="#handleSliderSpeed" pickOnBounds="true" preserveRatio="true" />
+                <ImageView fx:id="imageView" fitHeight="591.0" fitWidth="1090.0" onDragDone="#handleSliderSpeed" pickOnBounds="true" preserveRatio="true" />
             </center>
         </BorderPane>
     </center>
+   <bottom>
+      <Label fx:id="lblPictureTitel" alignment="CENTER" contentDisplay="CENTER" text="Label" BorderPane.alignment="CENTER">
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <font>
+            <Font size="16.0" />
+         </font>
+         <padding>
+            <Insets bottom="10.0" />
+         </padding>
+      </Label>
+   </bottom>
 </BorderPane>

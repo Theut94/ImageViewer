@@ -13,6 +13,7 @@ import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -25,11 +26,14 @@ public class ImageViewerWindowController implements Initializable
 {
     private final List<Image> images = new ArrayList<>();
 
+
     private int currentImageIndex = 0;
     private int speed = 2;
     private ExecutorService es;
-    private boolean isRunning = false;
+    private ImageSwapper is;
 
+    @FXML
+    private Label lblPictureTitel;
     @FXML
     private Slider sliderSpeed;
     @FXML
@@ -86,33 +90,48 @@ public class ImageViewerWindowController implements Initializable
         if (!images.isEmpty())
         {
             imageView.setImage(images.get(currentImageIndex));
+            lblPictureTitel.setText(images.get(currentImageIndex).getUrl());
         }
 
 
     }
 
     public void handleBtnStartAction(ActionEvent actionEvent) {
-        if( !es.isShutdown() || !isRunning)
+        if(is == null)
         {
         imageView.setImage(images.get(currentImageIndex));
 
-        ImageSwapper imageSwapper = new ImageSwapper(images, speed);
-        imageSwapper.valueProperty().addListener( (observable,oldv, newv) ->{
+        is = new ImageSwapper(images, speed);
+        is.valueProperty().addListener( (observable,oldv, newv) ->{
             imageView.setImage(newv);
 
         } );
-        imageSwapper.messageProperty().addListener((observable, oldValue, newValue) -> {
+        is.messageProperty().addListener((observable, oldValue, newValue) -> {
+            lblPictureTitel.setText(newValue);
             System.out.println(newValue);
         });
 
-        es.execute(imageSwapper);
-        isRunning = true;}
-        else{
-            es.shutdownNow();
-            System.out.println("thread has stopped");
-            isRunning=false;}
+        es.execute(is);
+        is.setRunning(true);
+        }
+        else if(!is.Running())
+        {
+            es.execute(is);
+            is.valueProperty().addListener( (observable,oldv, newv) ->{
+                imageView.setImage(newv);
 
-        System.out.println(isRunning);
+            } );
+            is.messageProperty().addListener((observable, oldValue, newValue) -> {
+                lblPictureTitel.setText(newValue);
+                System.out.println(newValue);
+            });
+            is.setRunning(true);
+        }
+        else{
+
+            is.setRunning(false);}
+
+        System.out.println(is.Running());
 
     }
 
